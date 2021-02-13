@@ -1,0 +1,542 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+class MyContainer extends StatefulWidget {
+  final Color renk;
+  final Widget child;
+  final Function onPress;
+
+  MyContainer({this.renk = Colors.blueGrey, this.child, this.onPress});
+
+  @override
+  _MyContainerState createState() => _MyContainerState();
+}
+
+class _MyContainerState extends State<MyContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.onPress,
+      child: Container(
+        margin: EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: widget.renk,
+        ),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class DownArea extends StatelessWidget {
+  final String cins;
+  final IconData sekil;
+  DownArea({this.sekil, this.cins});
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          sekil,
+          size: 35,
+          color: Colors.white,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          cins,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class OptimizeCard extends StatefulWidget {
+  final double mindeger;
+  final double maxdeger;
+  final String baslik;
+  final int parcalama;
+  double deger = 0.0;
+  OptimizeCard({this.baslik, this.mindeger, this.maxdeger, this.parcalama});
+  @override
+  _OptimizeCardState createState() => _OptimizeCardState();
+}
+
+class _OptimizeCardState extends State<OptimizeCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          widget.baslik,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(
+          height: 3,
+        ),
+        Text(
+          '${widget.deger.round()}',
+          style: TextStyle(
+            color: Colors.blueGrey[700],
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(
+          height: 3,
+        ),
+        Slider(
+          min: widget.mindeger,
+          max: widget.maxdeger,
+          divisions: widget.parcalama,
+          value: widget.deger,
+          onChanged: (double newValue) {
+            setState(() {
+              widget.deger = newValue;
+            });
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class NumericKart extends StatefulWidget {
+  final String baslik;
+   int baslangicdegeri;
+  NumericKart({this.baslik, this.baslangicdegeri});
+  @override
+  _NumericKartState createState() => _NumericKartState();
+}
+
+class _NumericKartState extends State<NumericKart> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 1,
+          child: RotatedBox(
+            quarterTurns: -1,
+            child: Text(
+              widget.baslik,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueGrey[500],
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: RotatedBox(
+            quarterTurns: -1,
+            child: Text(
+              widget.baslangicdegeri.toString(),
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueGrey[800],
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ButtonTheme(
+                minWidth: 36,
+                child: OutlineButton(
+                  borderSide: BorderSide(
+                    color: Colors.blueGrey[800],
+                    
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      widget.baslangicdegeri++;
+                    });
+                  },
+                  child: Icon(
+                    FontAwesomeIcons.plus,
+                    size: 10,
+                  ),
+                ),
+              ),
+              ButtonTheme(
+                minWidth: 36,
+                child: OutlineButton(
+                  onPressed: () {
+                    setState(() {
+                      widget.baslangicdegeri--;
+                    });
+                  },
+                  child: Icon(
+                    FontAwesomeIcons.minus,
+                    size: 10,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+class TavsiyeC extends StatelessWidget
+{
+  final String baslik;
+  final String tsonuc;
+  TavsiyeC({this.baslik,this.tsonuc});
+  @override
+  Widget build(BuildContext context) {
+   return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        baslik,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      Text(
+                        ,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  );
+                 
+  }
+
+
+
+}
+
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import './getadvice.dart';
+import './mywidgets.dart';
+
+class InputPage extends StatefulWidget {
+  @override
+  _InputPageState createState() => _InputPageState();
+}
+
+class _InputPageState extends State<InputPage> {
+  String seciliCins;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Life Calc",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: MyContainer(
+                    renk: Colors.blueGrey[300],
+                    child: NumericKart(
+                      baslik: "BOY",
+                      baslangicdegeri: 170,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: MyContainer(
+                    renk: Colors.blueGrey[300],
+                    child: NumericKart(
+                      baslik: "KİLO",
+                      baslangicdegeri: 45,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: MyContainer(
+              renk: Colors.blueGrey[300],
+              child: OptimizeCard(
+                baslik: "Haftada Kaç Gün Spor Yapıyorsunuz?",
+                mindeger: 0,
+                maxdeger: 7,
+                parcalama: 7,
+              ),
+            ),
+          ),
+          Expanded(
+            child: MyContainer(
+              renk: Colors.blueGrey[300],
+              child: OptimizeCard(
+                baslik: "GÜNDE KAÇ ADET SİGARA İÇİYOSUNUZ?",
+                mindeger: 0,
+                maxdeger: 30,
+                parcalama: 30,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: MyContainer(
+                        onPress: () {
+                          setState(() {
+                            seciliCins = "KADIN";
+                          });
+                        },
+                        renk: seciliCins == "KADIN"
+                            ? Colors.blueGrey[800]
+                            : Colors.blueGrey[300],
+                        child: DownArea(
+                          cins: "KADIN",
+                          sekil: FontAwesomeIcons.venus,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: MyContainer(
+                        onPress: () {
+                          setState(() {
+                            seciliCins = "ERKEK";
+                          });
+                        },
+                        renk: seciliCins == "ERKEK"
+                            ? Colors.blueGrey[800]
+                            : Colors.blueGrey[300],
+                        child: DownArea(
+                          cins: "ERKEK",
+                          sekil: FontAwesomeIcons.mars,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                ButtonTheme(
+                  minWidth: 400,
+                  buttonColor: Colors.blueGrey[700],
+                  hoverColor: Colors.white,
+                  highlightColor: Colors.white,
+                  child: RaisedButton(
+                    onPressed: () {
+                      Route route = MaterialPageRoute(builder: (context){return adviceAl();});
+                      Navigator.push(context,route);
+                      
+                    },
+                    child: Text("TAVSİYE AL!",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        )),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+import 'dart:async';
+
+import 'package:calisma1/resultTavsiye.dart';
+import 'package:flutter/material.dart';
+
+class adviceAl extends StatefulWidget {
+  
+  @override
+  adviceAlState createState() => adviceAlState();
+
+}
+
+class adviceAlState extends State<adviceAl> {
+  @override
+  void initState()
+  {
+ _timer = Timer.periodic(Duration(seconds: 2), (timer) { 
+     setState(() {
+       if(_counter>0)
+       {
+_counter--;
+_visible = !_visible;
+       }else{
+         _timer.cancel();
+         Route route = MaterialPageRoute(builder: (context){return TavsiyeSonucu();});
+         Navigator.push(context,route);
+       }
+     });
+   });
+super.initState();
+  }
+  bool _visible =true;
+  Timer _timer;
+  int _counter=10;
+  
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.blueGrey[800],
+        brightness: Brightness.light,
+        accentColor: Colors.red[300],
+        scaffoldBackgroundColor: Colors.blueGrey[600],
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Life Calc"),
+        ),
+        body: Center(
+          child: AnimatedOpacity(
+            
+            opacity: _visible==true ? 1 : 0,
+                      duration: Duration(seconds: 2),
+                      child: Text(
+              
+              "Analysing...",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                decoration: TextDecoration.combine(
+                  [TextDecoration.underline, TextDecoration.overline],
+                ),
+                decorationThickness: 2.0,
+                decorationColor: Colors.orange,
+                decorationStyle: TextDecorationStyle.dashed,
+                shadows: [ Shadow(
+                  blurRadius: 2.0,
+                  color: Colors.black,
+                  offset: Offset(4,1),
+                  ),]
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+import 'package:calisma1/LifeCalcTable.dart';
+import 'package:flutter/material.dart';
+import './mywidgets.dart';
+import 'input_page.dart';
+import './LifeCalcTable.dart';
+class TavsiyeSonucu extends StatefulWidget {
+  @override
+  _TavsiyeSonucuState createState() => _TavsiyeSonucuState();
+}
+
+class _TavsiyeSonucuState extends State<TavsiyeSonucu> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.blueGrey[800],
+        brightness: Brightness.light,
+        accentColor: Colors.red[300],
+        scaffoldBackgroundColor: Colors.blueGrey[600],
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Life Calc"),
+        ),
+        body: Center(
+          child: Container(
+            width: 400,
+            height: 400,
+            color: Colors.blueGrey[700],
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                TavsiyeC(baslik: "Spora Devam : ",tsonuc: "Evet",),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  TavsiyeC(baslik: "Ortalama Degerler İyimi :",tsonuc: "Hayır",),
+                        SizedBox(
+                    height: 40,
+                  ),
+                 TavsiyeC(baslik: "Yağ Oranı Azaltılmalımı :",tsonuc: "Evet",),
+                        SizedBox(
+                    height: 40,
+                  ),
+                  TavsiyeC(baslik: "Obezite Durumu : ",tsonuc: "Hayır",),
+                        SizedBox(
+                    height: 40,
+                  ),
+                  TavsiyeC(baslik: "Ortalama LifeCalc : ",tsonuc: "24.5",),
+      SizedBox(height: 30,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RaisedButton(onPressed: () {
+                        Route route = MaterialPageRoute(builder: (context){return InputPage();});
+                        Navigator.push(context, route);
+                        },
+                      color: Colors.blueGrey[900],
+                      child: Text("En Başa Dön!",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,
+                      color: Colors.white),),
+                      ),
+                      SizedBox(width: 10,),
+                        RaisedButton(onPressed: () { 
+                              Route route = MaterialPageRoute(builder: (context){return LifeCalcTableDeger();});
+                        Navigator.push(context, route);
+                         },
+                      color: Colors.blueGrey[900],
+                      child: Text("LifeCalcTable!",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,
+                      color: Colors.white),),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
